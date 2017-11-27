@@ -109,6 +109,7 @@ public class ImageViewer extends AppCompatActivity
             String sImage;
             sImage = imageUri.toString();
             imageName.setText("Image URI = " + sImage);
+            imageView.setPanLimit(SubsamplingScaleImageView.PAN_LIMIT_OUTSIDE);
             imageView.setOrientation(SubsamplingScaleImageView.ORIENTATION_270);
             imageView.setImage(ImageSource.uri(sImage));
 
