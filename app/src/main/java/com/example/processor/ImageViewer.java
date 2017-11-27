@@ -1,6 +1,6 @@
 package com.example.processor;
 
-import android.content.Intent;
+import android.content.Intent;;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,23 +8,26 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
+import com.davemorrissey.labs.subscaleview.ImageSource;
+import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
 
 public class ImageViewer extends AppCompatActivity
 {
     private static final int PICK_IMAGE_REQUEST = 1;
     int p=0;
     int r=0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image_viewer);
         selectImageFromGallery();
-
     }
+
     public void rotateImage(View view)
     {
-        ImageView imageView = (ImageView)findViewById(R.id.photo);
+        SubsamplingScaleImageView imageView = findViewById(R.id.photo);
         switch (r){
             case 0:
                 imageView.setRotation((float) 90.0);
@@ -49,7 +52,7 @@ public class ImageViewer extends AppCompatActivity
     }
     public void changeTemplate(View view)
     {
-        ImageView template = (ImageView) findViewById(R.id.template);
+        ImageView template = findViewById(R.id.template);
         switch (p)
         {
             case 0:
@@ -61,8 +64,12 @@ public class ImageViewer extends AppCompatActivity
                 p++;
                 break;
             case 2:
+                template.setImageResource(R.drawable.img3);
+                p++;
+                break;
+            case 3:
                 template.setImageResource(R.drawable.img0);
-                p = 0;
+                p=0;
                 break;
             default:
                 break;
@@ -96,16 +103,21 @@ public class ImageViewer extends AppCompatActivity
     private void handleUserPickedImage(Intent aData) {
         if ((aData != null) && (aData.getData() != null)) {
 
-            Button imageName = (Button) findViewById(R.id.button);
+            Button imageName = findViewById(R.id.button);
             Uri imageUri = aData.getData();
-            ImageView imageView = (ImageView)findViewById(R.id.photo);
-                imageView.setImageURI(imageUri);
+            SubsamplingScaleImageView imageView = findViewById(R.id.photo);
             String sImage;
             sImage = imageUri.toString();
             imageName.setText("Image URI = " + sImage);
+            imageView.setOrientation(SubsamplingScaleImageView.ORIENTATION_270);
+            imageView.setImage(ImageSource.uri(sImage));
+
+
+
         } else {
             Toast.makeText(getApplicationContext(), "No image chosen",
                     Toast.LENGTH_SHORT).show();
         }
     }
+
 }

@@ -5,4 +5,5 @@
         <item>@drawable/img1</item>
         <item>@drawable/img2</item>
     </string-array>
+    <string name="title_activity_test">Test</string>
 </resources>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.widget.RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,60 +7,67 @@
     app:layout_constraintBottom_toBottomOf="parent"
     tools:context="com.example.processor.ImageViewer">
 
-    <RelativeLayout
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:onClick="changeTemplate"
+        android:text="Template"
+        app:layout_constraintEnd_toStartOf="@+id/button4"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="8dp"
+        android:elevation="0dp"
+        android:onClick="rotateImage"
+        android:text="Rotate"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:layout_editor_absoluteY="0dp" />
+
+    <com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView
+        android:id="@+id/photo"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="138dp"
-        tools:layout_editor_absoluteY="489dp"
-        tools:ignore="MissingConstraints">
+        android:adjustViewBounds="false"
+        android:scaleType="centerInside"
+        app:layout_constraintDimensionRatio="H4:5"
+        app:panEnabled="true"
+        app:zoomEnabled="true"
+        app:quickScaleEnabled="true"
 
-        <Button
-            android:id="@+id/button3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:onClick="changeTemplate"
-            android:text="Template" />
+        />
 
-        <Button
-            android:id="@+id/button4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentTop="true"
-            android:onClick="rotateImage"
-            android:text="Rotate" />
+    <ImageView
+        android:id="@+id/template"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerInside"
+        android:src="@drawable/img0"
+        app:layout_constraintDimensionRatio="H4:5"
+        android:adjustViewBounds="true"
 
-        <ImageView
-            android:id="@+id/photo"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentTop="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+        />
 
-        <ImageView
-            android:id="@+id/template"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentStart="true"
-            android:src="@drawable/img0"
-            android:layout_alignParentTop="true"
-            />
+    <Button
+        android:id="@+id/button"
+        android:layout_width="370dp"
+        android:layout_height="45dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="16dp"
+        android:layout_marginStart="8dp"
+        android:onClick="selectButton"
+        android:text="Select Image"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
-        <Button
-            android:id="@+id/button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:onClick="selectButton"
-            android:text="Select Image"
-            app:layout_constraintBottom_toBottomOf="parent"
-            tools:layout_editor_absoluteX="341dp" />
-    </RelativeLayout>
-</android.support.constraint.ConstraintLayout>
+</android.widget.RelativeLayout>

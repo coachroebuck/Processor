@@ -46,4 +46,8 @@ public class MainActivity extends AppCompatActivity {
         Intent chosen = new Intent(this, ImageViewer.class);
                 startActivity(chosen);
     }
+    public void test(View view){
+        Intent test = new Intent(this, Test.class);
+        startActivity(test);
+    }
 }
