@@ -4,6 +4,7 @@ import android.content.Intent;;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -17,6 +18,13 @@ public class ImageViewer extends AppCompatActivity
     int p=0;
     int r=0;
 
+
+    float x1,x2;
+    float y1, y2;
+    float diffx, diffy;
+    int swipe = 100;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -25,6 +33,93 @@ public class ImageViewer extends AppCompatActivity
         selectImageFromGallery();
     }
 
+    public boolean onTouchEvent(MotionEvent touchevent)
+    {
+        switch (touchevent.getAction())
+        {
+            case MotionEvent.ACTION_DOWN:
+            {
+                x1 = touchevent.getX();
+                y1 = touchevent.getY();
+                break;
+            }
+            case MotionEvent.ACTION_UP:
+            {
+                x2 = touchevent.getX();
+                y2 = touchevent.getY();
+
+                diffx = x2 -x1;
+                diffy = y2-y1;
+
+
+                //Left to right
+                if (x1 < x2 && Math.abs(diffx) > swipe && Math.abs(diffy) < Math.abs(diffx))
+                {
+
+                }
+                //Right to left
+                if (x1 > x2 && Math.abs(diffx) > swipe && Math.abs(diffy) < Math.abs(diffx))
+                {
+
+                }
+                //Up to down
+                if (y1 < y2 && Math.abs(diffy) > swipe && Math.abs(diffy) > Math.abs(diffx))
+                {
+                    ImageView template = findViewById(R.id.template);
+                    switch (p)
+                    {
+                        case 0:
+                            template.setImageResource(R.drawable.img1);
+                            p++;
+                            break;
+                        case 1:
+                            template.setImageResource(R.drawable.img2);
+                            p++;
+                            break;
+                        case 2:
+                            template.setImageResource(R.drawable.img3);
+                            p++;
+                            break;
+                        case 3:
+                            template.setImageResource(R.drawable.img0);
+                            p=0;
+                            break;
+                        default:
+                            break;
+                    }
+
+                }
+                //Down to up
+                if (y1 > y2 && Math.abs(diffy) > swipe && Math.abs(diffy) > Math.abs(diffx))
+                {
+                    ImageView template = findViewById(R.id.template);
+                    switch (p)
+                    {
+                        case 0:
+                            template.setImageResource(R.drawable.img1);
+                            p = 3;
+                            break;
+                        case 3:
+                            template.setImageResource(R.drawable.img2);
+                            p--;
+                            break;
+                        case 2:
+                            template.setImageResource(R.drawable.img3);
+                            p--;
+                            break;
+                        case 1:
+                            template.setImageResource(R.drawable.img0);
+                            p--;
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                break;
+            }
+        }
+        return false;
+    }
     public void rotateImage(View view)
     {
         SubsamplingScaleImageView imageView = findViewById(R.id.photo);
@@ -110,7 +205,12 @@ public class ImageViewer extends AppCompatActivity
             sImage = imageUri.toString();
             imageName.setText("Image URI = " + sImage);
             imageView.setPanLimit(SubsamplingScaleImageView.PAN_LIMIT_OUTSIDE);
-            imageView.setOrientation(SubsamplingScaleImageView.ORIENTATION_270);
+
+
+
+
+
+
             imageView.setImage(ImageSource.uri(sImage));
 
 
