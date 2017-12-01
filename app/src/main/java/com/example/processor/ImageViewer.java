@@ -144,19 +144,19 @@ public class ImageViewer extends AppCompatActivity
         SubsamplingScaleImageView imageView = findViewById(R.id.photo);
         switch (r){
             case 0:
-                imageView.setRotation((float) 90.0);
+                imageView.setOrientation(90);
                 r++;
                 break;
             case 1:
-                imageView.setRotation((float) 180.0);
+                imageView.setOrientation(180);
                 r++;
                 break;
             case 2:
-                imageView.setRotation((float) 270.0);
+                imageView.setOrientation(270);
                 r++;
                 break;
             case 3:
-                imageView.setRotation((float) 0.0);
+                imageView.setOrientation(0);
                 r = 0;
                 break;
             default:
