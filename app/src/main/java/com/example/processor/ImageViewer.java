@@ -225,13 +225,14 @@ public class ImageViewer extends AppCompatActivity
             imageName.setText("Image URI = " + sImage);
             imageView.setPanLimit(SubsamplingScaleImageView.PAN_LIMIT_OUTSIDE);
             imageView.setImage(ImageSource.uri(sImage));
-
-
-
         } else {
             Toast.makeText(getApplicationContext(), "No image chosen",
                     Toast.LENGTH_SHORT).show();
         }
+    }
+
+
+
     }
 
 }
