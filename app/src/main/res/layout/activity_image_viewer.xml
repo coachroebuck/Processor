@@ -33,29 +33,39 @@
         app:layout_constraintEnd_toEndOf="parent"
         tools:layout_editor_absoluteY="0dp" />
 
-    <com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView
-        android:id="@+id/photo"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:adjustViewBounds="false"
-        android:scaleType="centerInside"
-        app:layout_constraintDimensionRatio="H4:5"
-        app:panEnabled="true"
-        app:zoomEnabled="true"
-        app:quickScaleEnabled="true"
+        android:layout_height="match_parent">
 
-        />
+        <com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView
+            android:id="@+id/photo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="false"
 
-    <ImageView
-        android:id="@+id/template"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerInside"
-        android:src="@drawable/img0"
-        app:layout_constraintDimensionRatio="H4:5"
-        android:adjustViewBounds="true"
+            android:layout_alignWithParentIfMissing="false"
+            android:layout_centerVertical="false"
+            android:adjustViewBounds="false"
+            android:clickable="false"
+            android:scaleType="fitXY"
+            app:layout_constraintDimensionRatio="H4:5"
+            app:panEnabled="true"
+            app:quickScaleEnabled="true"
+            app:zoomEnabled="true" />
 
-        />
+        <ImageView
+            android:id="@+id/template"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:cropToPadding="false"
+            android:scaleType="centerInside"
+
+            android:src="@drawable/img0"
+            app:layout_constraintDimensionRatio="H4:5" />
+    </RelativeLayout>
+
+
 
     <Button
         android:id="@+id/button"

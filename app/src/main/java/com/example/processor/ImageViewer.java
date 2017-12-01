@@ -1,6 +1,7 @@
 package com.example.processor;
 
 import android.content.Intent;;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -24,6 +25,12 @@ public class ImageViewer extends AppCompatActivity
     float diffx, diffy;
     int swipe = 100;
 
+    int displayWidth  = Resources.getSystem().getDisplayMetrics().widthPixels;
+    double h = displayWidth*1.25;
+    int ivHeight = (int) h;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -31,6 +38,18 @@ public class ImageViewer extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image_viewer);
         selectImageFromGallery();
+        SubsamplingScaleImageView photo = findViewById(R.id.photo);
+        ImageView template = findViewById(R.id.template);
+        template.setX(0);
+        template.setY(150);
+        photo.setX(0);
+        photo.setY(150);
+        template.requestLayout();
+        template.getLayoutParams().height = ivHeight;
+        photo.getLayoutParams().width = displayWidth;
+        photo.requestLayout();
+        photo.getLayoutParams().height = ivHeight;
+        photo.getLayoutParams().width = displayWidth;
     }
 
     public boolean onTouchEvent(MotionEvent touchevent)
@@ -205,12 +224,6 @@ public class ImageViewer extends AppCompatActivity
             sImage = imageUri.toString();
             imageName.setText("Image URI = " + sImage);
             imageView.setPanLimit(SubsamplingScaleImageView.PAN_LIMIT_OUTSIDE);
-
-
-
-
-
-
             imageView.setImage(ImageSource.uri(sImage));
 
 
