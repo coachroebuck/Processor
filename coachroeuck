@@ -1,0 +1,24 @@
+I was asked by Mark Nyon to perform a code review.
+
+I have a very important question: Are you new to Android development, or are you new to programming?
+
+The answer to this question will determine how I go about providing feedback.
+
+Worth noting regardless of your answer: You might want to explore modifying your image view in this manner:
+
+        float[] matrixValues = new float[9];
+        View view = findViewById(R.id.photo);
+        final Matrix matrix = view.getMatrix();
+        matrix.getValues(matrixValues);
+        matrix.preScale(sx, sy);
+        matrix.preTranslate(dx, dy);
+        matrix.preRotate(degrees, px, py);
+        matrix.postScale(sx, sy);
+        matrix.postTranslate(dx, dy);
+        matrix.postRotate(degrees, px, py);
+
+I can't remember the order in which scaling/translating/rotating must be called. You'll have to RTFM to understand how to manipulate the matrix of a UI component.
+
+I would have pushed up a branch of suggested changes, but, to be honest, I would be effectively redesigning your project.
+
+Thoughts?
