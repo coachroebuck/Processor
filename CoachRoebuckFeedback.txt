@@ -1,0 +1,150 @@
+----------------------------------------------------------------
+Immeiate comments regarding source code
+----------------------------------------------------------------
+
+I'm sure you are aware that there are numerous build errors throughout your app... ???
+Bitmap Creator and Test have been deleted. Neither are being used.
+ImageViewer should not be an activity. 
+ImageViewer: I've cleaned up a lot of source code
+
+----------------------------------------------------------------
+Comments regarding software engineering:
+----------------------------------------------------------------
+-  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
+READ READ READ!!
+-  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
+Learn to RTFM:
+https://www.urbandictionary.com/define.php?term=RTFM
+
+This includes references to programming languages and code examples. It will save you a lot of trouble.
+
+-  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
+Automated Tests
+-  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
+Make sure you gain a solid understanding of TTD (Test-Driven Development). This means, writing automated tests to support your source code. You will be so happy you did! It's better to catch errors in development than in production. You'd be surprised to hear that most companies, including the major corporations, don't write such tests, then wonder why there are so many errors in production. TTD has worked out very well for me.
+
+-  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
+Organizing your source code
+-  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
+Get into a habit of organizing your source code. I've provided an example in my code.
+Spell out your variables. instead of:
+
+int p=0;
+int r=0;
+
+perhaps you could declare:
+
+int pictureIndex = 0;
+int rotationDegrees = 0;
+
+
+Instead of
+float x1,x2;
+float y1, y2;
+float diffx, diffy;
+
+You could have used:
+Point point1, point2, diffPoint;
+
+If a variable is used in only one place, you can combine it. For example:
+
+From:
+int displayWidth = Resources.getSystem().getDisplayMetrics().widthPixels;
+double h = displayWidth*1.25;
+int ivHeight = (int) h;
+
+To:
+final int displayWidth = Resources.getSystem().getDisplayMetrics().widthPixels;
+final int ivHeight = (int)(displayWidth * 1.25);
+
+The most serious are your switch cases. If you leave your source code idle for a year and return to it later, you won't have a clue what those numbers mean. You'll want to spell out names as well.	
+-  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
+SOLID Principles
+-  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
+You will want to read up on SOLID Principles. It takes time to fully understanding, but will improve the quality of your source code.
+The below link, although applies to C#, can be applied to any programming language:
+
+https://www.codeproject.com/Articles/703634/SOLID-architecture-principles-using-simple-Csharp
+
+----------------------------------------------------------------
+Comments regarding Android Development:
+----------------------------------------------------------------
+I've attached an important *.png file. 
+
+-  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
+Activities
+-  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
+Keep the activities to a minimum, and keep the source code inside each activity to a minimum. 
+It is extremely important to understand the life cycle of both Activities and Fragments:
+
+https://developer.android.com/guide/components/activities/activity-lifecycle.html
+
+Your source code 
+
+Follow the pattern of one activity and multiple fragments. Any additional activity to be added to any future app: You better have a damn good reason for it. For example:
+
+http://uchallenge.me
+
+I have a total of only two activities: one for the main menu, the other for the active challenge (lesson). 
+
+-  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
+Text
+-  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
+Any text to be displayed on the UI should not be placed inside the source code. For example:
+
+dimensions.setText("Screen: " + sHeight + "px x " + sWidth + "px");
+
+Instead, create string Resources: https://developer.android.com/guide/topics/resources/string-resource.html
+
+and do this:
+
+values.xml: <string name="screen_resolution">Screen Resolution: %d px X %d px</string>
+
+*.java: dimensions.setText(String.format(getString(R.string.screen_resolution, width, height)));
+        
+However, hard-coded strings to be used to control the application are acceptable. e.g. 
+final public static String SOME_KEY = "Some value";
+
+Same rule applies to your layouts. 
+
+-  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
+Text Formatting
+-  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
+Gain a solid understanding of the very powerful programming language feature of formatting text. Your source code will be a lot cleaner:
+
+https://developer.android.com/reference/java/util/Formatter.html
+
+-  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
+Mutable vs Immutable Objects
+-  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
+Mutable objects can be changed. Immutable objects cannot. 
+
+This leads to, for example, the screen resolution you display on the screen. 
+Because this info is probably not going to change, you want this info to be immutable. 
+In JAVA, this is accomplished by declaring a variable to be "final". For example:
+
+final int height = Resources.getSystem().getDisplayMetrics().heightPixels;
+final int width = Resources.getSystem().getDisplayMetrics().widthPixels;
+
+-  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
+The dreaded NullPointerException
+-  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
+Null pointer exceptions occur when we try to access a method or property of a component that has not been initialized. 
+In your source code, there's a chance that this line of code can result in receiving a null object:
+
+ActivityManager am = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
+
+If the activity manager is not available, this next line of code will result in a null pointer exception, crashing the app:
+final int memoryClass = am.getMemoryClass();
+
+check for null... A LOT!!!!!
+
+if(am != null) {
+	
+}
+
+-  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
+Third Party Libraries
+-  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
+Don't be too quick to embrace third party libraries. Understand the risks and drawbacks before introducing any third party library to your app.
+
