@@ -24,10 +24,6 @@
             android:name=".ImageViewer"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:parentActivityName=".MainActivity"></activity>
-        <activity
-            android:name=".Test"
-            android:label="@string/title_activity_test"
-            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
     </application>
 
 </manifest>

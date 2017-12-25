@@ -230,9 +230,5 @@ public class ImageViewer extends AppCompatActivity
                     Toast.LENGTH_SHORT).show();
         }
     }
-
-
-
-    }
-
 }
+
