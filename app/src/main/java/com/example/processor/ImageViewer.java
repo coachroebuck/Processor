@@ -16,24 +16,26 @@ import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
 public class ImageViewer extends AppCompatActivity
 {
     private static final int PICK_IMAGE_REQUEST = 1;
-    int imageIndex = 0;
-    int rotationDegrees = 0;
-
-    float x1,x2;
-    float y1, y2;
-    float diffx, diffy;
-    int swipe = 100;
+    private int imageIndex = 0;
+    private int rotationDegrees = 0;
+    private float x1,x2;
+    private float y1, y2;
+    private float diffx, diffy;
+    private int swipe = 100;
 
     final int displayWidth = Resources.getSystem().getDisplayMetrics().widthPixels;
     final int ivHeight = (int)(displayWidth * 1.25);
+
+    private SubsamplingScaleImageView photo;
+    private ImageView template;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
 
-        final SubsamplingScaleImageView photo = findViewById(R.id.photo);
-        final ImageView template = findViewById(R.id.template);
+        photo = findViewById(R.id.photo);
+        template = findViewById(R.id.template);
 
         setContentView(R.layout.activity_image_viewer);
         selectImageFromGallery();
@@ -83,7 +85,6 @@ public class ImageViewer extends AppCompatActivity
                 //Up to down
                 if (y1 < y2 && Math.abs(diffy) > swipe && Math.abs(diffy) > Math.abs(diffx))
                 {
-                    final ImageView template = findViewById(R.id.template);
                     switch (imageIndex )
                     {
                         case 0:
@@ -110,7 +111,6 @@ public class ImageViewer extends AppCompatActivity
                 //Down to up
                 if (y1 > y2 && Math.abs(diffy) > swipe && Math.abs(diffy) > Math.abs(diffx))
                 {
-                    final ImageView template = findViewById(R.id.template);
                     switch (imageIndex )
                     {
                         case 0:
@@ -140,22 +140,21 @@ public class ImageViewer extends AppCompatActivity
     }
     public void rotateImage(View view)
     {
-        final SubsamplingScaleImageView imageView = findViewById(R.id.photo);
         switch (rotationDegrees){
             case 0:
-                imageView.setOrientation(90);
+                photo.setOrientation(90);
                 rotationDegrees++;
                 break;
             case 1:
-                imageView.setOrientation(180);
+                photo.setOrientation(180);
                 rotationDegrees++;
                 break;
             case 2:
-                imageView.setOrientation(270);
+                photo.setOrientation(270);
                 rotationDegrees++;
                 break;
             case 3:
-                imageView.setOrientation(0);
+                photo.setOrientation(0);
                 rotationDegrees = 0;
                 break;
             default:
@@ -165,7 +164,6 @@ public class ImageViewer extends AppCompatActivity
     }
     public void changeTemplate(View view)
     {
-        final ImageView template = findViewById(R.id.template);
         switch (imageIndex )
         {
             case 0:
