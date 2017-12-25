@@ -13,4 +13,6 @@
     <string name="max_memory">Max Memory: %d MB</string>
     <string name="test">Test</string>
     <string name="suggested_memory">Shouldn\'t use more than %d MB</string>
+    <string name="no_image_chosen">No image chosen</string>
+    <string name="image_uri">Image URI = %s</string>
 </resources>

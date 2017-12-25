@@ -1,6 +1,6 @@
 package com.example.processor;
 
-import android.content.Intent;;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
@@ -29,17 +29,17 @@ public class ImageViewer extends AppCompatActivity
     double h = displayWidth*1.25;
     int ivHeight = (int) h;
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+
+        final SubsamplingScaleImageView photo = findViewById(R.id.photo);
+        final ImageView template = findViewById(R.id.template);
+
         setContentView(R.layout.activity_image_viewer);
         selectImageFromGallery();
-        SubsamplingScaleImageView photo = findViewById(R.id.photo);
-        ImageView template = findViewById(R.id.template);
+
         template.setX(0);
         template.setY(150);
         photo.setX(0);
@@ -70,21 +70,22 @@ public class ImageViewer extends AppCompatActivity
                 diffx = x2 -x1;
                 diffy = y2-y1;
 
-
+                //TODO: fill in these blanks...
                 //Left to right
-                if (x1 < x2 && Math.abs(diffx) > swipe && Math.abs(diffy) < Math.abs(diffx))
-                {
-
-                }
-                //Right to left
-                if (x1 > x2 && Math.abs(diffx) > swipe && Math.abs(diffy) < Math.abs(diffx))
-                {
-
-                }
+//                if (x1 < x2 && Math.abs(diffx) > swipe && Math.abs(diffy) < Math.abs(diffx))
+//                {
+//
+//                }
+//                //Right to left
+//                if (x1 > x2 && Math.abs(diffx) > swipe && Math.abs(diffy) < Math.abs(diffx))
+//                {
+//
+//                }
+                //END TODO
                 //Up to down
                 if (y1 < y2 && Math.abs(diffy) > swipe && Math.abs(diffy) > Math.abs(diffx))
                 {
-                    ImageView template = findViewById(R.id.template);
+                    final ImageView template = findViewById(R.id.template);
                     switch (p)
                     {
                         case 0:
@@ -111,7 +112,7 @@ public class ImageViewer extends AppCompatActivity
                 //Down to up
                 if (y1 > y2 && Math.abs(diffy) > swipe && Math.abs(diffy) > Math.abs(diffx))
                 {
-                    ImageView template = findViewById(R.id.template);
+                    final ImageView template = findViewById(R.id.template);
                     switch (p)
                     {
                         case 0:
@@ -141,7 +142,7 @@ public class ImageViewer extends AppCompatActivity
     }
     public void rotateImage(View view)
     {
-        SubsamplingScaleImageView imageView = findViewById(R.id.photo);
+        final SubsamplingScaleImageView imageView = findViewById(R.id.photo);
         switch (r){
             case 0:
                 imageView.setOrientation(90);
@@ -166,7 +167,7 @@ public class ImageViewer extends AppCompatActivity
     }
     public void changeTemplate(View view)
     {
-        ImageView template = findViewById(R.id.template);
+        final ImageView template = findViewById(R.id.template);
         switch (p)
         {
             case 0:
@@ -190,21 +191,19 @@ public class ImageViewer extends AppCompatActivity
         }
     }
     public void selectImageFromGallery(){
-        Intent picker = new Intent();
+        final Intent picker = new Intent();
         picker.setType("image/*");
         picker.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(Intent.createChooser(picker, "Select Picture"), PICK_IMAGE_REQUEST);
     }
     public void selectButton(View view){
-        Intent picker = new Intent();
+        final Intent picker = new Intent();
         picker.setType("image/*");
         picker.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(Intent.createChooser(picker, "Select Picture"), PICK_IMAGE_REQUEST);
     }
     @Override
-    protected void onActivityResult(
-            int aRequestCode, int aResultCode, Intent aData
-    ){
+    protected void onActivityResult(int aRequestCode, int aResultCode, Intent aData) {
         switch (aRequestCode) {
             case PICK_IMAGE_REQUEST:
                 handleUserPickedImage(aData);
@@ -217,16 +216,15 @@ public class ImageViewer extends AppCompatActivity
     private void handleUserPickedImage(Intent aData) {
         if ((aData != null) && (aData.getData() != null)) {
 
-            Button imageName = findViewById(R.id.button);
-            Uri imageUri = aData.getData();
-            SubsamplingScaleImageView imageView = findViewById(R.id.photo);
-            String sImage;
-            sImage = imageUri.toString();
-            imageName.setText("Image URI = " + sImage);
+            final Button imageName = findViewById(R.id.button);
+            final Uri imageUri = aData.getData();
+            final SubsamplingScaleImageView imageView = findViewById(R.id.photo);
+            final String sImage = imageUri.toString();
+            imageName.setText(String.format(getString(R.string.image_uri), sImage));
             imageView.setPanLimit(SubsamplingScaleImageView.PAN_LIMIT_OUTSIDE);
             imageView.setImage(ImageSource.uri(sImage));
         } else {
-            Toast.makeText(getApplicationContext(), "No image chosen",
+            Toast.makeText(getApplicationContext(), R.string.no_image_chosen,
                     Toast.LENGTH_SHORT).show();
         }
     }
