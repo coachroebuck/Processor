@@ -16,18 +16,16 @@ import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
 public class ImageViewer extends AppCompatActivity
 {
     private static final int PICK_IMAGE_REQUEST = 1;
-    int p=0;
-    int r=0;
-
+    int imageIndex = 0;
+    int rotationDegrees = 0;
 
     float x1,x2;
     float y1, y2;
     float diffx, diffy;
     int swipe = 100;
 
-    int displayWidth  = Resources.getSystem().getDisplayMetrics().widthPixels;
-    double h = displayWidth*1.25;
-    int ivHeight = (int) h;
+    final int displayWidth = Resources.getSystem().getDisplayMetrics().widthPixels;
+    final int ivHeight = (int)(displayWidth * 1.25);
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -86,23 +84,23 @@ public class ImageViewer extends AppCompatActivity
                 if (y1 < y2 && Math.abs(diffy) > swipe && Math.abs(diffy) > Math.abs(diffx))
                 {
                     final ImageView template = findViewById(R.id.template);
-                    switch (p)
+                    switch (imageIndex )
                     {
                         case 0:
                             template.setImageResource(R.drawable.img1);
-                            p++;
+                            imageIndex ++;
                             break;
                         case 1:
                             template.setImageResource(R.drawable.img2);
-                            p++;
+                            imageIndex ++;
                             break;
                         case 2:
                             template.setImageResource(R.drawable.img3);
-                            p++;
+                            imageIndex ++;
                             break;
                         case 3:
                             template.setImageResource(R.drawable.img0);
-                            p=0;
+                            imageIndex =0;
                             break;
                         default:
                             break;
@@ -113,23 +111,23 @@ public class ImageViewer extends AppCompatActivity
                 if (y1 > y2 && Math.abs(diffy) > swipe && Math.abs(diffy) > Math.abs(diffx))
                 {
                     final ImageView template = findViewById(R.id.template);
-                    switch (p)
+                    switch (imageIndex )
                     {
                         case 0:
                             template.setImageResource(R.drawable.img1);
-                            p = 3;
+                            imageIndex  = 3;
                             break;
                         case 3:
                             template.setImageResource(R.drawable.img2);
-                            p--;
+                            imageIndex --;
                             break;
                         case 2:
                             template.setImageResource(R.drawable.img3);
-                            p--;
+                            imageIndex --;
                             break;
                         case 1:
                             template.setImageResource(R.drawable.img0);
-                            p--;
+                            imageIndex --;
                             break;
                         default:
                             break;
@@ -143,22 +141,22 @@ public class ImageViewer extends AppCompatActivity
     public void rotateImage(View view)
     {
         final SubsamplingScaleImageView imageView = findViewById(R.id.photo);
-        switch (r){
+        switch (rotationDegrees){
             case 0:
                 imageView.setOrientation(90);
-                r++;
+                rotationDegrees++;
                 break;
             case 1:
                 imageView.setOrientation(180);
-                r++;
+                rotationDegrees++;
                 break;
             case 2:
                 imageView.setOrientation(270);
-                r++;
+                rotationDegrees++;
                 break;
             case 3:
                 imageView.setOrientation(0);
-                r = 0;
+                rotationDegrees = 0;
                 break;
             default:
                 break;
@@ -168,23 +166,23 @@ public class ImageViewer extends AppCompatActivity
     public void changeTemplate(View view)
     {
         final ImageView template = findViewById(R.id.template);
-        switch (p)
+        switch (imageIndex )
         {
             case 0:
                 template.setImageResource(R.drawable.img1);
-                p++;
+                imageIndex ++;
                 break;
             case 1:
                 template.setImageResource(R.drawable.img2);
-                p++;
+                imageIndex ++;
                 break;
             case 2:
                 template.setImageResource(R.drawable.img3);
-                p++;
+                imageIndex ++;
                 break;
             case 3:
                 template.setImageResource(R.drawable.img0);
-                p=0;
+                imageIndex =0;
                 break;
             default:
                 break;
