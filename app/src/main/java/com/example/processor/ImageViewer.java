@@ -16,18 +16,17 @@ import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
 public class ImageViewer extends AppCompatActivity
 {
     private static final int PICK_IMAGE_REQUEST = 1;
-    private int imageIndex = 0;
+    private TemplateType imageIndex = TemplateType.NewYork;
     private int rotationDegrees = 0;
-    private float x1,x2;
-    private float y1, y2;
-    private float diffx, diffy;
-    private int swipe = 100;
+    private float x1;
+    private float y1;
 
     final int displayWidth = Resources.getSystem().getDisplayMetrics().widthPixels;
     final int ivHeight = (int)(displayWidth * 1.25);
 
     private SubsamplingScaleImageView photo;
     private ImageView template;
+    private String fileTypeFilter = "image/*";
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -64,11 +63,11 @@ public class ImageViewer extends AppCompatActivity
             }
             case MotionEvent.ACTION_UP:
             {
-                x2 = touchevent.getX();
-                y2 = touchevent.getY();
+                final float x2 = touchevent.getX();
+                final float y2 = touchevent.getY();
 
-                diffx = x2 -x1;
-                diffy = y2-y1;
+                final float diffx = x2 - x1;
+                final float diffy = y2 - y1;
 
                 //TODO: fill in these blanks...
                 //Left to right
@@ -83,55 +82,17 @@ public class ImageViewer extends AppCompatActivity
 //                }
                 //END TODO
                 //Up to down
+                final int swipe = 100;
                 if (y1 < y2 && Math.abs(diffy) > swipe && Math.abs(diffy) > Math.abs(diffx))
                 {
-                    switch (imageIndex )
-                    {
-                        case 0:
-                            template.setImageResource(R.drawable.img1);
-                            imageIndex ++;
-                            break;
-                        case 1:
-                            template.setImageResource(R.drawable.img2);
-                            imageIndex ++;
-                            break;
-                        case 2:
-                            template.setImageResource(R.drawable.img3);
-                            imageIndex ++;
-                            break;
-                        case 3:
-                            template.setImageResource(R.drawable.img0);
-                            imageIndex =0;
-                            break;
-                        default:
-                            break;
-                    }
-
+                    imageIndex = imageIndex.next();
+                    template.setImageResource(TemplateType.getImageResource(imageIndex));
                 }
                 //Down to up
                 if (y1 > y2 && Math.abs(diffy) > swipe && Math.abs(diffy) > Math.abs(diffx))
                 {
-                    switch (imageIndex )
-                    {
-                        case 0:
-                            template.setImageResource(R.drawable.img1);
-                            imageIndex  = 3;
-                            break;
-                        case 3:
-                            template.setImageResource(R.drawable.img2);
-                            imageIndex --;
-                            break;
-                        case 2:
-                            template.setImageResource(R.drawable.img3);
-                            imageIndex --;
-                            break;
-                        case 1:
-                            template.setImageResource(R.drawable.img0);
-                            imageIndex --;
-                            break;
-                        default:
-                            break;
-                    }
+                    imageIndex = imageIndex.previous();
+                    template.setImageResource(TemplateType.getImageResource(imageIndex));
                 }
                 break;
             }
@@ -164,37 +125,18 @@ public class ImageViewer extends AppCompatActivity
     }
     public void changeTemplate(View view)
     {
-        switch (imageIndex )
-        {
-            case 0:
-                template.setImageResource(R.drawable.img1);
-                imageIndex ++;
-                break;
-            case 1:
-                template.setImageResource(R.drawable.img2);
-                imageIndex ++;
-                break;
-            case 2:
-                template.setImageResource(R.drawable.img3);
-                imageIndex ++;
-                break;
-            case 3:
-                template.setImageResource(R.drawable.img0);
-                imageIndex =0;
-                break;
-            default:
-                break;
-        }
+        imageIndex = imageIndex.next();
+        template.setImageResource(TemplateType.getImageResource(imageIndex));
     }
     public void selectImageFromGallery(){
         final Intent picker = new Intent();
-        picker.setType("image/*");
+        picker.setType(fileTypeFilter);
         picker.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(Intent.createChooser(picker, "Select Picture"), PICK_IMAGE_REQUEST);
     }
     public void selectButton(View view){
         final Intent picker = new Intent();
-        picker.setType("image/*");
+        picker.setType(fileTypeFilter);
         picker.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(Intent.createChooser(picker, "Select Picture"), PICK_IMAGE_REQUEST);
     }

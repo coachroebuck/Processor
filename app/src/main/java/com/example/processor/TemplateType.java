@@ -18,7 +18,7 @@ public enum TemplateType {
     }
 
     //link each image resource with the template value.
-    public int getImageResource(TemplateType templateType) {
+    static public int getImageResource(TemplateType templateType) {
         switch (templateType) {
             case NewYork:
                 return R.drawable.img0;
