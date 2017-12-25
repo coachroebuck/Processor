@@ -14,32 +14,23 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //Display functions/////////////////////////////////////////////////////////////////////////
-        int height;
-        int width;
+        final int height = Resources.getSystem().getDisplayMetrics().heightPixels;
+        final int width = Resources.getSystem().getDisplayMetrics().widthPixels;
+        final Runtime rt = Runtime.getRuntime();
+        final long maxMemory = rt.maxMemory()/(1024*1024);
+        final ActivityManager am = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
 
-        height = Resources.getSystem().getDisplayMetrics().heightPixels;
-        width = Resources.getSystem().getDisplayMetrics().widthPixels;
+        final TextView dimensions = findViewById(R.id.dimensions);
+        final TextView heap = findViewById(R.id.heap);
+        final TextView shouldUse = findViewById(R.id.maxMemory);
 
-        String sHeight = String.valueOf(height);
-        String sWidth = String.valueOf(width);
+        dimensions.setText(String.format(getString(R.string.screen_resolution, width, height)));
+        heap.setText(String.format(getString(R.string.max_memory, maxMemory)));
 
-        TextView dimensions = (TextView) findViewById(R.id.dimensions);
-        dimensions.setText("Screen: " + sHeight + "px x " + sWidth + "px");
-
-        //Memory functions//////////////////////////////////////////////////////////////////////////
-        Runtime rt = Runtime.getRuntime();
-        long maxMemory = rt.maxMemory();
-        maxMemory = maxMemory/(1024*1024);
-        String memTotal = String.valueOf(maxMemory);
-        TextView heap = (TextView) findViewById(R.id.heap);
-        heap.setText("Max Memory: " + memTotal +"MB");
-
-        ActivityManager am = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
-        int memoryClass = am.getMemoryClass();
-        String memClass = String.valueOf(memoryClass);
-        TextView shouldUse = (TextView) findViewById(R.id.maxMemory);
-        shouldUse.setText("Shouldn't use more than: " + memClass + "MB");
+        if(am != null) {
+            final int memoryClass = am.getMemoryClass();
+            shouldUse.setText(String.format(getString(R.string.suggested_memory, memoryClass)));
+        }
     }
 
     public void chosen(View view){

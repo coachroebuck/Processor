@@ -6,4 +6,11 @@
         <item>@drawable/img2</item>
     </string-array>
     <string name="title_activity_test">Test</string>
+    <string name="screen_resolution">Screen Resolution: %d px X %d px</string>
+    <string name="choose_picture">Choose picture</string>
+    <string name="dimensions">Dimensions</string>
+    <string name="heap">Heap</string>
+    <string name="max_memory">Max Memory: %d MB</string>
+    <string name="test">Test</string>
+    <string name="suggested_memory">Shouldn\'t use more than %d MB</string>
 </resources>

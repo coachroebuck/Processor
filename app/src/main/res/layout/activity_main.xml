@@ -13,12 +13,6 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <Button
-            android:id="@+id/test"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="test"
-            android:text="Test" />
     </LinearLayout>
 
     <Button
@@ -29,7 +23,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:onClick="chosen"
-        android:text="Choose picture"
+        android:text="@string/choose_picture"
         app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -40,7 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginTop="8dp"
-        android:text="Dimensions"
+        android:text="@string/dimensions"
         app:layout_constraintBottom_toTopOf="@+id/heap"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -51,7 +45,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:text="Heap"
+        android:text="@string/heap"
         app:layout_constraintBottom_toTopOf="@+id/maxMemory"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
@@ -61,7 +55,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:text="Max Memory"
+        android:text="@string/max_memory"
         app:layout_constraintBottom_toTopOf="@+id/button2"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
