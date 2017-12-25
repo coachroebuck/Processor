@@ -101,27 +101,8 @@ public class ImageViewer extends AppCompatActivity
     }
     public void rotateImage(View view)
     {
-        switch (rotationDegrees){
-            case 0:
-                photo.setOrientation(90);
-                rotationDegrees++;
-                break;
-            case 1:
-                photo.setOrientation(180);
-                rotationDegrees++;
-                break;
-            case 2:
-                photo.setOrientation(270);
-                rotationDegrees++;
-                break;
-            case 3:
-                photo.setOrientation(0);
-                rotationDegrees = 0;
-                break;
-            default:
-                break;
-        }
-
+        rotationDegrees = (rotationDegrees + 90)%360;
+        photo.setOrientation(rotationDegrees);
     }
     public void changeTemplate(View view)
     {
@@ -132,13 +113,13 @@ public class ImageViewer extends AppCompatActivity
         final Intent picker = new Intent();
         picker.setType(fileTypeFilter);
         picker.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(picker, "Select Picture"), PICK_IMAGE_REQUEST);
+        startActivityForResult(Intent.createChooser(picker, getString(R.string.select_picture)), PICK_IMAGE_REQUEST);
     }
     public void selectButton(View view){
         final Intent picker = new Intent();
         picker.setType(fileTypeFilter);
         picker.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(picker, "Select Picture"), PICK_IMAGE_REQUEST);
+        startActivityForResult(Intent.createChooser(picker, getString(R.string.select_picture)), PICK_IMAGE_REQUEST);
     }
     @Override
     protected void onActivityResult(int aRequestCode, int aResultCode, Intent aData) {

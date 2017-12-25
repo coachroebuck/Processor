@@ -15,4 +15,5 @@
     <string name="suggested_memory">Shouldn\'t use more than %d MB</string>
     <string name="no_image_chosen">No image chosen</string>
     <string name="image_uri">Image URI = %s</string>
+    <string name="select_picture">Select Picture</string>
 </resources>
