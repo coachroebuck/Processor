@@ -33,11 +33,11 @@ public class ImageViewer extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
 
-        photo = findViewById(R.id.photo);
-        template = findViewById(R.id.template);
-
         setContentView(R.layout.activity_image_viewer);
         selectImageFromGallery();
+
+        photo = findViewById(R.id.photo);
+        template = findViewById(R.id.template);
 
         template.setX(0);
         template.setY(150);
